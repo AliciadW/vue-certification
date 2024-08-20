@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import MovieCardsList from '@/components/MovieCards/MovieCardsList.vue'
+import MovieCardList from '@/components/MovieCard/MovieCardList.vue'
 
 import { items } from '@/assets/movies.json'
 </script>
 
 <template>
-  <MovieCardsList :items />
+  <MovieCardList :items />
 </template>
 
 <style scoped></style>
