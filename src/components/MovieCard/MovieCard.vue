@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import MovieCardImage from '@/components/MovieCard/MovieCardImage.vue'
+import MovieCardDetail from '@/components/MovieCard/MovieCardDetail.vue'
+
 const props = defineProps(['item'])
 
 /*
@@ -10,9 +13,8 @@ const props = defineProps(['item'])
 
 <template>
   <div>
-    <img :src="item.image" alt="Movie image" />
-    <div>Movie details</div>
+    <MovieCardImage :image="item.image" />
+
+    <MovieCardDetail :item />
   </div>
 </template>
-
-<style scoped></style>
