@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MovieCard from '@/components/MovieCards/MovieCard.vue'
+import MovieCard from '@/components/MovieCard/MovieCard.vue'
 
 const props = defineProps(['items'])
 </script>
