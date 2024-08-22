@@ -9,17 +9,18 @@ const genres = ref<string[]>(props.item.genres)
 </script>
 
 <template>
-  <div class="flex flex-col bg-white p-3 rounded-b-lg">
-    <h4 class="font-bold text-xl">{{ item.name }}</h4>
+  <div class="flex flex-col flex-1 bg-white p-3 rounded-b-lg justify-between">
+    <div class="flex flex-col">
+      <h4 class="font-bold text-xl">{{ item.name }}</h4>
 
-    <div class="flex">
-      <MovieCardGenre class="mb-4" v-for="(genre, index) in genres" :key="index" :genre />
-    </div>
+      <div class="flex">
+        <MovieCardGenre class="flex mb-4" v-for="(genre, index) in genres" :key="index" :genre />
+      </div>
 
-    <div class="flex flex-col justify-between">
       <p class="text-xs h-auto">{{ item.description }}</p>
-      <div class="mt-4">Rating component</div>
     </div>
+
+    <div class="mt-4">Rating component</div>
   </div>
 </template>
 
