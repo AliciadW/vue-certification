@@ -12,7 +12,7 @@ const props = defineProps(['item'])
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col">
     <MovieCardImage :image="item.image" />
 
     <MovieCardDetail :item />
