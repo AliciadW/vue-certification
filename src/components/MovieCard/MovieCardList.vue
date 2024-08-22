@@ -9,5 +9,3 @@ const props = defineProps(['items'])
     <MovieCard v-for="item in items" :key="item.id" :item />
   </div>
 </template>
-
-<style scoped></style>
