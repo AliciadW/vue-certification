@@ -3,7 +3,7 @@ const props = defineProps(['genre'])
 </script>
 
 <template>
-  <div class="movie-card-genre bg-indigo-600 px-1.5 text-white w-fit rounded-full mr-1">
+  <div class="text-xs bg-indigo-600 py-0.5 px-2 text-white w-fit rounded-full mr-1">
     {{ genre }}
   </div>
 </template>

@@ -7,5 +7,3 @@ import { items } from '@/assets/movies.json'
 <template>
   <MovieCardList :items />
 </template>
-
-<style scoped></style>
