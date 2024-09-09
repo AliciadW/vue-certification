@@ -9,5 +9,6 @@ const props = defineProps(['image'])
 <style scoped>
 .movie-card-image {
   max-height: 450px;
+  object-fit: cover;
 }
 </style>
