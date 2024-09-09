@@ -7,9 +7,3 @@ const props = defineProps(['genre'])
     {{ genre }}
   </div>
 </template>
-
-<style scoped>
-.movie-card-genre {
-  font-size: 10px;
-}
-</style>
