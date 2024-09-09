@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 import MovieCardGenre from '@/components/MovieCard/MovieCardGenre.vue'
+import MovieRating from '@/components/MovieRating/MovieRating.vue'
 
 const props = defineProps(['item'])
 
@@ -20,8 +21,6 @@ const genres = ref<string[]>(props.item.genres)
       <p class="text-xs h-auto">{{ item.description }}</p>
     </div>
 
-    <div class="mt-4">Rating component</div>
+    <movie-rating :rating="item.rating" class="mt-4" />
   </div>
 </template>
-
-<style scoped></style>
