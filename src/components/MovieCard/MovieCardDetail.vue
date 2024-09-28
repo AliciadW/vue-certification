@@ -7,6 +7,16 @@ import MovieRating from '@/components/MovieRating/MovieRating.vue'
 const props = defineProps(['item'])
 
 const genres = ref<string[]>(props.item.genres)
+const rating = ref<number>(props.item.rating)
+
+const setRating = (n: number): void => {
+  // do not update the rating if the user selects the current rating
+  if (n === rating.value) {
+    return
+  }
+
+  rating.value = n
+}
 </script>
 
 <template>
@@ -21,6 +31,6 @@ const genres = ref<string[]>(props.item.genres)
       <p class="text-xs h-auto">{{ item.description }}</p>
     </div>
 
-    <movie-rating :rating="item.rating" class="mt-4" />
+    <movie-rating :rating="rating" class="mt-4" @select-rating="setRating" />
   </div>
 </template>

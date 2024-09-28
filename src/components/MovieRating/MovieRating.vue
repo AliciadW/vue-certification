@@ -6,9 +6,14 @@ const props = defineProps(['rating'])
 
 <template>
   <div class="flex">
-    <p class="mr-1">Rating: ({{ rating }})</p>
+    <p class="text-xs mr-1">Rating: ({{ rating }}/5)</p>
     <div class="flex items-center">
-      <span v-for="n in rating" :key="n"> <StarIcon class="size-4 text-yellow-500" /> </span>
+      <button @click.prevent="$emit('selectRating', n)" v-for="n in 5" :key="n">
+        <StarIcon
+          class="size-4 text-gray-500 hover:text-yellow-500"
+          :class="{ 'text-yellow-500': rating >= n }"
+        />
+      </button>
     </div>
   </div>
 </template>
