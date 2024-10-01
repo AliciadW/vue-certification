@@ -5,6 +5,7 @@ import MovieCardGenre from '@/components/MovieCard/MovieCardGenre.vue'
 import MovieRating from '@/components/MovieRating/MovieRating.vue'
 
 const props = defineProps(['item'])
+const emit = defineEmits(['updateRating'])
 
 const genres = ref<string[]>(props.item.genres)
 const rating = ref<number>(props.item.rating)
@@ -16,6 +17,8 @@ const setRating = (n: number): void => {
   }
 
   rating.value = n
+
+  emit('updateRating', n)
 }
 </script>
 
