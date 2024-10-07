@@ -6,7 +6,7 @@ const props = defineProps(['rating'])
 
 <template>
   <div class="flex">
-    <p class="text-xs mr-1">Rating: ({{ rating }}/5)</p>
+    <p class="text-xs mr-1">Rating: ({{ !!rating ? rating : '-' }}/5)</p>
     <div class="flex items-center">
       <button @click.prevent="$emit('selectRating', n)" v-for="n in 5" :key="n">
         <StarIcon
