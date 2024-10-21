@@ -34,6 +34,6 @@ const setRating = (n: number): void => {
       <p class="text-xs h-auto">{{ item.description }}</p>
     </div>
 
-    <movie-rating :rating="rating" class="mt-4" @select-rating="setRating" />
+    <movie-rating :rating class="mt-4" @select-rating="setRating" />
   </div>
 </template>

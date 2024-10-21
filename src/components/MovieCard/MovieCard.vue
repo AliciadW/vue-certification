@@ -11,7 +11,7 @@ const rating = ref<number | null>(props.item.rating)
 
 <template>
   <div class="flex flex-col">
-    <MovieCardImage :image="item.image" :rating="rating" />
+    <MovieCardImage :image="item.image" :rating />
 
     <MovieCardDetail :item @update-rating="rating = $event" />
   </div>

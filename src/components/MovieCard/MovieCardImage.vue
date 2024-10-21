@@ -8,8 +8,8 @@ const props = defineProps(['image', 'rating'])
   <div class="relative">
     <img
       class="object-cover object-center h-[450px] w-full rounded-t-lg"
-      :src="image"
       alt="Movie image"
+      :src="image"
     />
     <div class="absolute top-2 right-2">
       <StarIcon class="size-8 text-gray-500 relative" :class="{ 'text-yellow-500': !!rating }" />
