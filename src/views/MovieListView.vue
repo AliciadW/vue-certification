@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
-import MovieCardList from '@/components/MovieCard/MovieCardList.vue'
-import ModalBasic from '@/components/Modal/ModalBasic.vue'
-import AddMovieForm from '@/components/Form/AddMovieForm.vue'
-
-import { items } from '@/assets/movies.json'
-
+// TODO: Create types directory and move out
 interface MovieObject {
   description: string
   genres: string[]
@@ -17,23 +10,23 @@ interface MovieObject {
   rating: number | null
 }
 
+import { ref } from 'vue'
+
+import MovieCardList from '@/components/MovieCard/MovieCardList.vue'
+import ModalBasic from '@/components/Modal/ModalBasic.vue'
+import AddMovieForm from '@/components/Form/AddMovieForm.vue'
+
+import { items } from '@/assets/movies.json'
+
 const allItems = ref<MovieObject[]>(items)
 const openModal = ref<boolean>(false)
 
-const handleModal = (value: boolean) => {
+const handleModal = (value: boolean): void => {
   openModal.value = value
 }
 
-const addMovie = (): void => {
-  allItems.value.push({
-    description: 'string',
-    genres: ['12', '234'],
-    id: 8,
-    image: 'string',
-    inTheaters: false,
-    name: 'string',
-    rating: 4
-  })
+const addMovie = (movieData: MovieObject): void => {
+  allItems.value.push(movieData)
 }
 </script>
 
@@ -47,7 +40,7 @@ const addMovie = (): void => {
     </button>
     <MovieCardList :items="allItems" />
     <ModalBasic @open-modal="handleModal(true)" :is-open="openModal">
-      <AddMovieForm @close-modal="handleModal(false)" />
+      <AddMovieForm @close-modal="handleModal(false)" @add-movie="addMovie" />
     </ModalBasic>
   </div>
 </template>
