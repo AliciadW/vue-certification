@@ -30,11 +30,11 @@ const movieData = ref<MovieObject>({
 })
 // Random selection of genres
 const genres = ref<GenreObject[]>([
-  { text: 'Drama', value: 'drama' },
-  { text: 'Action', value: 'action' },
-  { text: 'Comedy', value: 'comedy' },
-  { text: 'Science fiction', value: 'sci-fi' },
-  { text: 'Adventure', value: 'adventure' }
+  { text: 'Drama', value: 'Drama' },
+  { text: 'Action', value: 'Action' },
+  { text: 'Comedy', value: 'Comedy' },
+  { text: 'Science fiction', value: 'Science fiction' },
+  { text: 'Adventure', value: 'Adventure' }
 ])
 
 const closeModal = () => {
