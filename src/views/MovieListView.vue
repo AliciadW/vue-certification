@@ -21,10 +21,6 @@ import { items } from '@/assets/movies.json'
 const allItems = ref<MovieObject[]>(items)
 const openModal = ref<boolean>(false)
 
-const handleModal = (value: boolean): void => {
-  openModal.value = value
-}
-
 const addMovie = (movieData: MovieObject): void => {
   allItems.value.push(movieData)
 }
@@ -34,13 +30,13 @@ const addMovie = (movieData: MovieObject): void => {
   <div class="flex flex-col">
     <button
       class="self-end rounded bg-yellow-500 hover:bg-yellow-600 py-1 px-2 mb-8 cursor-pointer font-medium"
-      @click="handleModal(true)"
+      @click="openModal = true"
     >
       Add movie
     </button>
     <MovieCardList :items="allItems" />
-    <ModalBasic @open-modal="handleModal(true)" :is-open="openModal">
-      <AddMovieForm @close-modal="handleModal(false)" @add-movie="addMovie" />
+    <ModalBasic :is-open="openModal">
+      <AddMovieForm @close-modal="openModal = false" @add-movie="addMovie" />
     </ModalBasic>
   </div>
 </template>
