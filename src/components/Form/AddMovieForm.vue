@@ -18,7 +18,7 @@ const addMovie = () => {
 </script>
 
 <template>
-  <div class="p-3">
+  <div class="p-4">
     <div class="flex flex-col mb-3">
       <label for="name">Name</label>
       <input

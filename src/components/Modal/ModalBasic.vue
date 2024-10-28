@@ -28,7 +28,7 @@ const props = defineProps(['isOpen'])
   z-index: 999;
   top: 50%;
   left: 50%;
-  width: 300px;
-  margin-left: -150px;
+  width: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
