@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
 
 import MovieCardGenre from '@/components/MovieCard/MovieCardGenre.vue'
 import MovieRating from '@/components/MovieRating/MovieRating.vue'
 
 const props = defineProps(['item'])
-const emit = defineEmits(['updateRating'])
+const emit = defineEmits(['updateRating', 'openEditModal', 'deleteMovie'])
 
 const genres = ref<string[]>(props.item.genres)
 const rating = ref<number>(props.item.rating)
@@ -42,6 +43,17 @@ watch(
       <p class="text-xs h-auto">{{ item.description }}</p>
     </div>
 
-    <movie-rating :rating class="mt-4" @select-rating="setRating" />
+    <div class="flex justify-between align-middle mt-4">
+      <movie-rating :rating @select-rating="setRating" />
+
+      <div class="flex">
+        <button @click="$emit('openEditModal')">
+          <PencilIcon class="size-4 text-gray-500 mr-2 hover:text-gray-600" />
+        </button>
+        <button @click="$emit('deleteMovie')">
+          <TrashIcon class="size-4 text-red-500 hover:text-red-600" />
+        </button>
+      </div>
+    </div>
   </div>
 </template>

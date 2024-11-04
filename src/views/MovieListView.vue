@@ -1,31 +1,27 @@
 <script setup lang="ts">
-// TODO: Create types directory and move out
-interface MovieObject {
-  description: string
-  genres: string[]
-  id: number
-  image: string
-  inTheaters: boolean
-  name: string
-  rating: number | null
-}
+import type { MovieObject } from '@/types/movieTypes'
 
 import { ref, computed } from 'vue'
+import { useMoviesStore } from '@/stores/movies'
+import { storeToRefs } from 'pinia'
 
 import MovieCardList from '@/components/MovieCard/MovieCardList.vue'
 import ModalBasic from '@/components/Modal/ModalBasic.vue'
 import AddMovieForm from '@/components/Form/AddMovieForm.vue'
 
-import { items } from '@/assets/movies.json'
+const movieStore = useMoviesStore()
 
-const allItems = ref<MovieObject[]>(items)
+const { movies } = storeToRefs(movieStore)
+
 const openModal = ref<boolean>(false)
-const numberOfMovies = ref<number>(allItems.value.length)
+const numberOfMovies = computed<number>(() => {
+  return movies?.value?.length
+})
 
 const averageRating = computed<number>(() => {
-  let ratings: number[] = []
+  let ratings: number[] = [0]
 
-  allItems.value.forEach((item) => {
+  movies?.value?.forEach((item) => {
     if (item.rating !== null) {
       ratings.push(item.rating)
     }
@@ -35,11 +31,11 @@ const averageRating = computed<number>(() => {
 })
 
 const addMovie = (movieData: MovieObject): void => {
-  allItems.value.push(movieData)
+  movies?.value?.push(movieData)
 }
 
 const clearRatings = (): void => {
-  allItems.value.forEach((item) => {
+  movies?.value?.forEach((item) => {
     item.rating = 0
   })
 }
@@ -69,7 +65,7 @@ const clearRatings = (): void => {
       </div>
     </div>
 
-    <MovieCardList :items="allItems" />
+    <MovieCardList :items="movies" />
     <ModalBasic :is-open="openModal">
       <AddMovieForm @close-modal="openModal = false" @add-movie="addMovie" />
     </ModalBasic>
