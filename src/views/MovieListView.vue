@@ -10,7 +10,7 @@ interface MovieObject {
   rating: number | null
 }
 
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 import MovieCardList from '@/components/MovieCard/MovieCardList.vue'
 import ModalBasic from '@/components/Modal/ModalBasic.vue'
@@ -20,6 +20,19 @@ import { items } from '@/assets/movies.json'
 
 const allItems = ref<MovieObject[]>(items)
 const openModal = ref<boolean>(false)
+const numberOfMovies = ref<number>(allItems.value.length)
+
+const averageRating = computed<number>(() => {
+  let ratings: number[] = []
+
+  allItems.value.forEach((item) => {
+    if (item.rating !== null) {
+      ratings.push(item.rating)
+    }
+  })
+
+  return Math.round(ratings.reduce((a, v) => a + v) / numberOfMovies.value)
+})
 
 const addMovie = (movieData: MovieObject): void => {
   allItems.value.push(movieData)
@@ -34,19 +47,26 @@ const clearRatings = (): void => {
 
 <template>
   <div class="flex flex-col">
-    <div class="flex self-end">
-      <button
-        class="rounded bg-orange-400 hover:bg-orange-500 py-1 px-2 mb-8 mr-4 cursor-pointer font-medium"
-        @click="clearRatings"
-      >
-        Reset ratings
-      </button>
-      <button
-        class="rounded bg-yellow-500 hover:bg-yellow-600 py-1 px-2 mb-8 cursor-pointer font-medium"
-        @click="openModal = true"
-      >
-        Add movie
-      </button>
+    <div class="flex justify-between">
+      <div class="flex text-yellow-50">
+        <p>Total movies: {{ numberOfMovies }}</p>
+        <p class="mx-4">|</p>
+        <p>Average rating: {{ averageRating }} / 5</p>
+      </div>
+      <div>
+        <button
+          class="rounded bg-orange-400 hover:bg-orange-500 py-1 px-2 mb-8 mr-4 cursor-pointer font-medium"
+          @click="clearRatings"
+        >
+          Reset ratings
+        </button>
+        <button
+          class="rounded bg-yellow-500 hover:bg-yellow-600 py-1 px-2 mb-8 cursor-pointer font-medium"
+          @click="openModal = true"
+        >
+          Add movie
+        </button>
+      </div>
     </div>
 
     <MovieCardList :items="allItems" />
