@@ -24,16 +24,31 @@ const openModal = ref<boolean>(false)
 const addMovie = (movieData: MovieObject): void => {
   allItems.value.push(movieData)
 }
+
+const clearRatings = (): void => {
+  allItems.value.forEach((item) => {
+    item.rating = 0
+  })
+}
 </script>
 
 <template>
   <div class="flex flex-col">
-    <button
-      class="self-end rounded bg-yellow-500 hover:bg-yellow-600 py-1 px-2 mb-8 cursor-pointer font-medium"
-      @click="openModal = true"
-    >
-      Add movie
-    </button>
+    <div class="flex self-end">
+      <button
+        class="rounded bg-orange-400 hover:bg-orange-500 py-1 px-2 mb-8 mr-4 cursor-pointer font-medium"
+        @click="clearRatings"
+      >
+        Reset ratings
+      </button>
+      <button
+        class="rounded bg-yellow-500 hover:bg-yellow-600 py-1 px-2 mb-8 cursor-pointer font-medium"
+        @click="openModal = true"
+      >
+        Add movie
+      </button>
+    </div>
+
     <MovieCardList :items="allItems" />
     <ModalBasic :is-open="openModal">
       <AddMovieForm @close-modal="openModal = false" @add-movie="addMovie" />

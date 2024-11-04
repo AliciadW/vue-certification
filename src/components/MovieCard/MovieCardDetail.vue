@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 import MovieCardGenre from '@/components/MovieCard/MovieCardGenre.vue'
 import MovieRating from '@/components/MovieRating/MovieRating.vue'
@@ -20,6 +20,14 @@ const setRating = (n: number): void => {
 
   emit('updateRating', n)
 }
+
+watch(
+  props.item,
+  () => {
+    rating.value = props.item.rating
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
