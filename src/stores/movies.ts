@@ -16,9 +16,15 @@ export const useMoviesStore = defineStore('movies', () => {
     movies.value = movies.value.filter((movie) => movie.name !== name)
   }
 
-  const addMovie = (movieData: MovieObject) => {
+  const addMovie = (movieData: MovieObject): void => {
     movies.value.push(movieData)
   }
 
-  return { movies, deleteMovieFromList, addMovie }
+  const updateRating = (rating: number, name: string): void => {
+    const movieIndex = movies.value.findIndex((movie) => movie.name === name)
+
+    movies.value[movieIndex].rating = rating
+  }
+
+  return { movies, deleteMovieFromList, addMovie, updateRating }
 })

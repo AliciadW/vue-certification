@@ -21,6 +21,6 @@ watch(
   <div class="flex flex-col">
     <MovieCardImage :image="item.image" :rating />
 
-    <MovieCardDetail :item @update-rating="rating = $event" />
+    <MovieCardDetail :item />
   </div>
 </template>

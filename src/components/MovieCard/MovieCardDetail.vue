@@ -9,7 +9,7 @@ import MovieRating from '@/components/MovieRating/MovieRating.vue'
 const movieStore = useMoviesStore()
 
 const props = defineProps(['item'])
-const emit = defineEmits(['updateRating', 'openEditModal', 'deleteMovie'])
+const emit = defineEmits(['openEditModal'])
 
 const genres = ref<string[]>(props.item.genres)
 const rating = ref<number>(props.item.rating)
@@ -22,7 +22,7 @@ const setRating = (n: number): void => {
 
   rating.value = n
 
-  emit('updateRating', n)
+  movieStore.updateRating(n, props.item.name)
 }
 
 watch(
