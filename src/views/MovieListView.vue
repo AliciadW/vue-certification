@@ -25,7 +25,8 @@ const averageRating = computed<number>(() => {
     }
   })
 
-  return Math.round(ratings.reduce((a, v) => a + v) / numberOfMovies.value)
+  // show average to one decimal
+  return Math.round((ratings.reduce((a, v) => a + v) / numberOfMovies.value) * 10) / 10
 })
 
 const clearRatings = (): void => {
