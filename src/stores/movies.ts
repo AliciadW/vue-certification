@@ -12,5 +12,9 @@ export const useMoviesStore = defineStore('movies', () => {
   // computed - getters
 
   // functions - actions
-  return { movies }
+  const deleteMovieFromList = (name: string): void => {
+    movies.value = movies.value.filter((movie) => movie.name !== name)
+  }
+
+  return { movies, deleteMovieFromList }
 })

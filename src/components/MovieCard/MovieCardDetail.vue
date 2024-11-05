@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
+import { useMoviesStore } from '@/stores/movies'
 
 import MovieCardGenre from '@/components/MovieCard/MovieCardGenre.vue'
 import MovieRating from '@/components/MovieRating/MovieRating.vue'
+
+const movieStore = useMoviesStore()
 
 const props = defineProps(['item'])
 const emit = defineEmits(['updateRating', 'openEditModal', 'deleteMovie'])
@@ -50,7 +53,7 @@ watch(
         <button @click="$emit('openEditModal')">
           <PencilIcon class="size-4 text-gray-500 mr-2 hover:text-gray-600" />
         </button>
-        <button @click="$emit('deleteMovie')">
+        <button @click="movieStore.deleteMovieFromList(item.name)">
           <TrashIcon class="size-4 text-red-500 hover:text-red-600" />
         </button>
       </div>
