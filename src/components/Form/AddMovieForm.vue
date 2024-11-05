@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MovieObject, GenreObject } from '@/types/movieTypes'
 
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useMoviesStore } from '@/stores/movies'
 
 const movieStore = useMoviesStore()
@@ -17,6 +17,11 @@ const movieData = ref<MovieObject>({
   name: '',
   rating: 0
 })
+
+const disabled = computed<boolean>(() => {
+  return movieData.value.name === '' || movieData.value.genres.length === 0
+})
+
 // Random selection of genres
 const genres = ref<GenreObject[]>([
   { text: 'Drama', value: 'Drama' },
@@ -26,16 +31,16 @@ const genres = ref<GenreObject[]>([
   { text: 'Adventure', value: 'Adventure' }
 ])
 
+const addGenre = (event: any): void => {
+  movieData.value.genres.push(event.target.value)
+}
+
 const closeModal = () => {
   // clear form, close modal
   emit('close-modal')
 }
 
 const addMovie = () => {
-  // TODO: Validation, clean up
-
-  // validate form
-
   // add movie
   movieStore.addMovie(movieData.value)
 
@@ -101,6 +106,7 @@ const addMovie = () => {
         id="genres"
         multiple
         v-model="movieData.genres"
+        @input="addGenre"
       >
         <option disabled value="">Please select genres</option>
         <option v-for="(genre, i) in genres" :key="i" :value="genre.value">{{ genre.text }}</option>
@@ -122,6 +128,8 @@ const addMovie = () => {
 
       <button
         class="rounded bg-yellow-500 hover:bg-yellow-600 py-1 px-2 cursor-pointer font-medium"
+        :class="{ 'bg-yellow-700 hover:bg-yellow-700 cursor-default': disabled }"
+        :disabled="disabled"
         @click="addMovie"
       >
         Save
