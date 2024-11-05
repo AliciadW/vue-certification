@@ -7,3 +7,8 @@ export interface MovieObject {
   name: string
   rating: number | null
 }
+
+export interface GenreObject {
+  text: string
+  value: string
+}
