@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { MovieObject } from '@/types/movieTypes'
-
 import { ref, computed } from 'vue'
 import { useMoviesStore } from '@/stores/movies'
 import { storeToRefs } from 'pinia'
@@ -29,10 +27,6 @@ const averageRating = computed<number>(() => {
 
   return Math.round(ratings.reduce((a, v) => a + v) / numberOfMovies.value)
 })
-
-const addMovie = (movieData: MovieObject): void => {
-  movies?.value?.push(movieData)
-}
 
 const clearRatings = (): void => {
   movies?.value?.forEach((item) => {
@@ -67,7 +61,7 @@ const clearRatings = (): void => {
 
     <MovieCardList :items="movies" />
     <ModalBasic :is-open="openModal">
-      <AddMovieForm @close-modal="openModal = false" @add-movie="addMovie" />
+      <AddMovieForm @close-modal="openModal = false" />
     </ModalBasic>
   </div>
 </template>

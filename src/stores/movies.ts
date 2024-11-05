@@ -16,5 +16,9 @@ export const useMoviesStore = defineStore('movies', () => {
     movies.value = movies.value.filter((movie) => movie.name !== name)
   }
 
-  return { movies, deleteMovieFromList }
+  const addMovie = (movieData: MovieObject) => {
+    movies.value.push(movieData)
+  }
+
+  return { movies, deleteMovieFromList, addMovie }
 })

@@ -1,21 +1,10 @@
 <script setup lang="ts">
+import type { MovieObject, GenreObject } from '@/types/movieTypes'
+
 import { ref } from 'vue'
+import { useMoviesStore } from '@/stores/movies'
 
-// TODO: Create types directory and move out
-interface MovieObject {
-  description: string
-  genres: string[]
-  id: number
-  image: string
-  inTheaters: boolean
-  name: string
-  rating: number | null
-}
-
-interface GenreObject {
-  text: string
-  value: string
-}
+const movieStore = useMoviesStore()
 
 const emit = defineEmits(['close-modal', 'add-movie'])
 
@@ -46,8 +35,9 @@ const addMovie = () => {
   // TODO: Validation, clean up
 
   // validate form
+
   // add movie
-  emit('add-movie', movieData.value)
+  movieStore.addMovie(movieData.value)
 
   // clear form, close modal
   movieData.value = {
