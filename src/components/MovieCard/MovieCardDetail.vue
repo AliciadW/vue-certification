@@ -9,7 +9,6 @@ import MovieRating from '@/components/MovieRating/MovieRating.vue'
 const movieStore = useMoviesStore()
 
 const props = defineProps(['item'])
-const emit = defineEmits(['openEditModal'])
 
 const genres = ref<string[]>(props.item.genres)
 const rating = ref<number>(props.item.rating)
@@ -50,7 +49,7 @@ watch(
       <movie-rating :rating @select-rating="setRating" />
 
       <div class="flex">
-        <button @click="$emit('openEditModal')">
+        <button @click="movieStore.updateMovie(item.name)">
           <PencilIcon class="size-4 text-gray-500 mr-2 hover:text-gray-600" />
         </button>
         <button @click="movieStore.deleteMovieFromList(item.name)">

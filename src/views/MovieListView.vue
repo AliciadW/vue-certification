@@ -9,9 +9,8 @@ import AddMovieForm from '@/components/Form/AddMovieForm.vue'
 
 const movieStore = useMoviesStore()
 
-const { movies } = storeToRefs(movieStore)
+const { movies, modalOpen } = storeToRefs(movieStore)
 
-const openModal = ref<boolean>(false)
 const numberOfMovies = computed<number>(() => {
   return movies?.value?.length
 })
@@ -53,7 +52,7 @@ const clearRatings = (): void => {
         </button>
         <button
           class="rounded bg-yellow-500 hover:bg-yellow-600 py-1 px-2 mb-8 cursor-pointer font-medium"
-          @click="openModal = true"
+          @click="modalOpen = true"
         >
           Add movie
         </button>
@@ -61,8 +60,8 @@ const clearRatings = (): void => {
     </div>
 
     <MovieCardList :items="movies" />
-    <ModalBasic :is-open="openModal">
-      <AddMovieForm @close-modal="openModal = false" />
+    <ModalBasic :is-open="modalOpen">
+      <AddMovieForm @close-modal="modalOpen = false" />
     </ModalBasic>
   </div>
 </template>

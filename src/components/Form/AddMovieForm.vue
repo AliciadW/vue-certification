@@ -1,22 +1,15 @@
 <script setup lang="ts">
-import type { MovieObject, GenreObject } from '@/types/movieTypes'
+import type { GenreObject } from '@/types/movieTypes'
 
 import { ref, computed } from 'vue'
 import { useMoviesStore } from '@/stores/movies'
+import { storeToRefs } from 'pinia'
 
 const movieStore = useMoviesStore()
 
 const emit = defineEmits(['close-modal', 'add-movie'])
 
-const movieData = ref<MovieObject>({
-  description: '',
-  genres: [],
-  id: 0,
-  image: '',
-  inTheaters: true,
-  name: '',
-  rating: 0
-})
+const { movieData } = storeToRefs(movieStore)
 
 const disabled = computed<boolean>(() => {
   return movieData.value.name === '' || movieData.value.genres.length === 0
